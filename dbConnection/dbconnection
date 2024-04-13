@@ -1,0 +1,22 @@
+package dbConnection
+
+import (
+	"database/sql"
+
+	_ "github.com/go-sql-driver/mysql"
+)
+
+var db *sql.DB
+
+func NewDB() {
+	var err error
+	db, err = sql.Open("mysql", "username:password@tcp(localhost:3306)/dbname")
+	if err != nil {
+		panic(err.Error())
+	}
+
+	err = db.Ping()
+	if err != nil {
+		panic(err.Error())
+	}
+}
